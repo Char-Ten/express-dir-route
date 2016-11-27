@@ -5,6 +5,7 @@ It's used to register routes that are base on files path.
 ## express-dir-routes
 ---
 ### Quick usage:
+* `npm install express-dir-route`
 * in file */app.js*:
   ```javascript
     var autoDirRoute=require('express-dir-routes');
