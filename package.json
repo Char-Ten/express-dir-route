@@ -1,0 +1,22 @@
+{
+  "name": "express-dir-route",
+  "version": "1.0.0",
+  "description": "a plugin for express.register routes base on file path",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Char-Ten/express-dir-route.git"
+  },
+  "author": "Charten",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Char-Ten/express-dir-route/issues"
+  },
+  "homepage": "https://github.com/Char-Ten/express-dir-route#readme"
+}
