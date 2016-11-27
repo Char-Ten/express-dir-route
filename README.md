@@ -1,1 +1,1 @@
-[中文](./README.md)
+[中文](./README_zh.md)
