@@ -2,7 +2,7 @@
 This is a simple and small plugin for express.  
 It's used to register routes that are base on files path. 
 
-## express-dir-routes
+## express-dir-route
 ---
 ### Quick usage:
 * `npm install express-dir-route`
