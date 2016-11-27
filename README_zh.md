@@ -70,6 +70,7 @@
        res.end('post homePage')
    })
    ```
+
 ---
 ### 使用说明
 * 本插件仅仅只是基于express的`app[method](route,handle)`方法，
