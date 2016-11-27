@@ -95,9 +95,10 @@
 * 访问接口：`/doc/auto-route-view`
 * 请求方法：`GET`
 * query参数  
-    | |参数|类型|说明|
-    |--|--|--|--|
-    |type|String|key有两个值，<br/>当type为nomal时，返回一个包含所有接口的info的简单数组，<br/>当type为tree时，返回一个包含所有接口的info的树形json。<br/>若type不存在或type为其他值时，返回接口文档的html文件||
+    <table>
+    <tr><th>参数</th><th>类型</th><th>说明</th></tr>
+    <tr><td>type</td><td>String</td><td>key有两个值，<br/>当type为nomal时，返回一个包含所有接口的info的简单数组，<br/>当type为tree时，返回一个包含所有接口的info的树形json。<br/>若type不存在或type为其他值时，返回接口文档的html文件</td></tr>
+    </table>
 * info里面用于渲染的模板参数：
 ```js
 info:{
