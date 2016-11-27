@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>doc</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+    <link href="http://cdn.bootcss.com/highlight.js/9.8.0/styles/googlecode.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background: #F9FAFC;
+            color: #1D8CE0;
+        }
+        
+        h1 {
+            padding: 5px;
+            border-bottom: 1px solid #D3DCE6;
+        }
+        
+        strong {
+            display: inline-block;
+            padding: 5px;
+            background: #E5E9F2;
+            color: #58B7FF;
+        }
+        
+        section {
+            margin: 10px 0;
+        }
+        
+        section>* {
+            vertical-align: middle;
+        }
+        
+        html,
+        body,
+        #app,
+        .main {
+            height: 100%;
+        }
+        
+        .list {
+            height: 100%;
+            overflow: auto;
+            background: #EFF2F7;
+        }
+        
+        .content {
+            height: 100%;
+            padding: 0 15px;
+            overflow: auto;
+        }
+        
+        .result {
+            background: #E5E9F2;
+        }
+        
+        .el-tree {
+            background: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <el-row class="main">
+            <el-col :span="6" class="list">
+                <el-tree :data="list" empty-text="null" :highlight-current="true" @node-click="eTreeClick"></el-tree>
+            </el-col>
+            <el-col :span="18" class="content">
+                <h1>{{h1}}</h1>
+                <p>{{summary}}</p>
+                <ul>
+                    <li>
+                        <h2>Route</h2>
+                        <section>
+                            <strong>{{route}}</strong>
+                        </section>
+                    </li>
+                    <li>
+                        <h2>Method</h2>
+                        <section>
+                            <strong>{{method}}</strong>
+                        </section>
+                    </li>
+                    <ct-li v-for="item in content" :ct="item"></ct-li>
+                    <li>
+                        <h2>测试</h2>
+                        <p>{{testText}}</p>
+                        <section>
+                            <strong>{{method.toUpperCase()}}</strong>
+                            <strong>{{testUrl}}</strong>
+                            <el-button type="primary" @click="eSendRequest">请求</el-button>
+                        </section>
+                        <section class="result" v-html="md"></section>
+                    </li>
+                </ul>
+            </el-col>
+        </el-row>
+    </div>
+    <template id="content">
+        <li>
+            <h2>{{ct.title}}</h2>
+            <section>
+                <p>{{ct.summary}}</p>
+            </section>
+            <section>
+                <el-table border :data="ct.table.tbody" style="width: 100%">
+                    <el-table-column v-for="item,index in ct.table.thead" :prop="index.toString()" :label="item"></el-table-column>
+                </el-table>
+            </section>
+            <section v-if="ct.warn">
+                <el-alert title="warn" type="error" :description="ct.warn" show-icon :closable="false"></el-alert>
+            </section>
+        </li> 
+    </template>
+    <script src="http://cdn.bootcss.com/marked/0.3.6/marked.min.js"></script>
+    <script src="http://cdn.bootcss.com/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="http://cdn.bootcss.com/highlight.js/9.8.0/languages/json.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="http://cdn.bootcss.com/vue-resource/1.0.3/vue-resource.min.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>
+        ; //set marked
+        (function() {
+            marked.setOptions({
+                renderer: new marked.Renderer(),
+                gfm: true,
+                tables: true,
+                breaks: true,
+                pedantic: true,
+                sanitize: true,
+                smartLists: true,
+                smartypants: true,
+                highlight: function(code) {
+                    return hljs.highlightAuto(code).value;
+                }
+            });
+        })();
+
+
+        ; //set data to formData
+        (function() {
+            Vue.http.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
+        })();
+
+
+        ; // ct-li
+        (function() {
+            Vue.component('ct-li', {
+                template: '#content',
+                props: ['ct']
+            })
+        })();
+
+        ; //main
+        (function() {
+            new Vue({
+                el: '#app',
+                data: {
+                    list: [],
+                    h1: '获取路由信息',
+                    summary: '',
+                    route: '/doc/auto-route-view',
+                    method: 'GET',
+                    content: [{
+                        title: 'Query',
+                        summary: '选择返回的数据',
+                        table: {
+                            thead: ['参数', 'type', '必填', '说明'],
+                            tbody: [
+                                ['type', 'String', '否', 'key的值为"nomal"时，返回一个正常的数组；当值为"tree"，返回一个树形数组；其他值或不填将返回本页面']
+                            ]
+                        }
+                    }],
+                    testText: '将返回一个简单的数组',
+                    testData: {},
+                    testUrl: '/doc/auto-route-view?type=nomal',
+                    md: ''
+                },
+                methods: {
+                    eTreeClick: function(node) {
+                        if (node.info) {
+                            this.h1 = node.info.name;
+                            this.summary = node.info.summary;
+                            this.route = node.info.route;
+                            this.method = node.info.method;
+                            this.content = node.info.content;
+                            this.testText = node.info.test.text || '';
+                            this.testData = node.info.test.data || {};
+                            this.testUrl = this.route + '?' + qs(node.info.test.query || {});
+                        }
+                    },
+                    eSendRequest: function() {
+                        this.$http({
+                            url: this.testUrl,
+                            method: this.method,
+                            body: this.testData,
+                        }).then(function(res) {
+                            this.md = marked('```json\n ' + JSON.stringify(res.body, null, 4) + ' \n```')
+                        })
+                    }
+                },
+                mounted: function() {
+                    this.$http.get('/doc/auto-route-view?type=tree').then(function(res) {
+                        return res.json()
+                    }).then(function(res) {
+                        this.list = res;
+                    })
+                }
+            });
+        })();
+
+        ; //queryString
+        function qs(test) {
+            if (typeof test == 'object') {
+                var a = [];
+                for (var i in test) {
+                    a.push(i + '=' + test[i]);
+                }
+                return a.join('&');
+            }
+            if (typeof test == 'string') {
+                test.replace('?', '');
+                var json = {};
+                var a = test.split('&');
+                a.forEach(function(item) {
+                    json[item.split('=')[0]] = item.split('=')[1]
+                });
+                return json;
+            }
+        }
+    </script>
+</body>
+
+</html>
