@@ -73,7 +73,8 @@ Then create the routes handle file and name it as the HTTP methods's name,such a
 * This plugin just using the express method:`app[method](route,handle)`to go through all the routes handle files whitch names are:`(GET|POST|PUT|PATCH|DELET).js`
 * You can named file as '`~GET.js`' so that it will translated into '`/*`';
 * And the routes handle file must exports a Object:
-  ```javascript
+ ```javascript 
+ 
   module.exports={
       info:{},
       handle:function(res,req,next){}
