@@ -1,6 +1,6 @@
 [中文](./README_zh.md)  
 This is a simple and small plugin for express.  
-It's used to register routes that are base on files path. 
+It's used to register routes base on files path. 
 
 ## express-dir-route
 ---
@@ -8,7 +8,7 @@ It's used to register routes that are base on files path.
 * `npm install express-dir-route`
 * in file */app.js*:
   ```javascript
-    var autoDirRoute=require('express-dir-routes');
+    var autoDirRoute=require('express-dir-route');
     var app=require('express')();
 
     autoDirRoute({
@@ -40,7 +40,7 @@ It's used to register routes that are base on files path.
     }
   ```
 
-* So you can create some directories in the directory whitch named 'routes'.
+* So you can create some directories in hte 'routes' directories.
 Then create the routes handle file and name it as the HTTP methods's name,such as:
   ```
     routes
@@ -71,7 +71,7 @@ Then create the routes handle file and name it as the HTTP methods's name,such a
 
 ---
 ### Instructions
-* This plugin just using the express method:`app[method](route,handle)`to go through all the routes handle files whitch names are:`(GET|POST|PUT|PATCH|DELET).js`
+* This plugin just using the express method:`app[method](route,handle)`and go through all the routes handle files whitch names are:`(GET|POST|PUT|PATCH|DELET).js`
 * You can named file as '`~GET.js`' so that it will translated into '`/*`';
 * And the routes handle file must exports a Object:
  ```javascript 
@@ -81,7 +81,7 @@ Then create the routes handle file and name it as the HTTP methods's name,such a
       handle:function(res,req,next){}
   }
   ``` 
-  The data in attribute `info` can be rendered a routes document.
+  The data in attribute `info` will be rendered a routes document.
 
 ---
 ###  routes document
