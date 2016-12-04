@@ -75,7 +75,8 @@
 ### 使用说明
 * 本插件仅仅只是基于express的`app[method](route,handle)`方法，
 对设置为路由文件夹进行遍历，并未修改任何express的属性方法。
-* **方法名文件**，即名字为`(GET|POST|PUT|PATCH|DELET)`的`.js`文件，
+* 为了更好的使用本插件，请务必将配置函数写在`body-parse`等相关`express`的中间件后面，不然在`routes handle`文件里面无法使用`request.bod/request.query`等便捷操作
+* **方法名文件**，即名字为`(GET|POST|PUT|PATCH|DELETE)`的`.js`文件，
 如`GET.js`、`POST.js`文件。本插件会遍历并获取它们的文件名作为请求方法，
 获取它们的文件路径作为请求url，读取其暴露的接口作为路由处理函数。
 对于其他文件不会做任何处理，所以可以在同级目录下放心地用`.js`文件做该路由文件的分模块处理。

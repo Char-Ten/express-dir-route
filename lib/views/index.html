@@ -193,6 +193,7 @@
                             this.testText = node.info.test.text || '';
                             this.testData = node.info.test.data || {};
                             this.testUrl = this.route + '?' + qs(node.info.test.query || {});
+                            this.md='';
                         }
                     },
                     eSendRequest: function() {
