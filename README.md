@@ -35,7 +35,7 @@ It's used to register routes base on files path.
             }
         },
         handle:function(req,res,next){
-            res.end(req.method+' '+req.url)// will respond  "get /routes/list/article"
+            res.end(req.method+' '+req.url)// will respond  "get /api/v1/list/article"
         }
     }
   ```
@@ -56,11 +56,11 @@ Then create the routes handle file and name it as the HTTP methods's name,such a
   ```
   They will be translated into:
   ```http
-    GET '/list/article';
-    GET '/list/friend';
-    POST '/list/article';
-    POST '/list/friend';
-    DELETE '/list/article';
+    GET '/api/v1/list/article';
+    GET '/api/v1/list/friend';
+    POST '/api/v1/list/article';
+    POST '/api/v1/list/friend';
+    DELETE '/api/v1/list/article';
   ```
 
 * It's a plugin so that it never change any attribute and method of express.You also can register routes like that:
