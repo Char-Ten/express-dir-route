@@ -61,15 +61,16 @@
    POST '/list/friend';
    DELETE '/list/article';
    ```
-* 因为是个插件，没有修改express实例的任何属性和方法，所以，仍然可以使用
-   ```js
+   
+* 因为是个插件，没有修改express实例的任何属性和方法，所以，仍然可以使用  
+  ```javascript
    app.get('/',function(req,res,next){
        res.end('homePage')
    });
    app.post('/',function(req,res,next){
        res.end('post homePage')
    })
-   ```
+  ```
 
 ---
 ### 使用说明
@@ -82,7 +83,8 @@
 对于其他文件不会做任何处理，所以可以在同级目录下放心地用`.js`文件做该路由文件的分模块处理。
 * 关于正则路由的问题，目前仅支持使用`~GET.js`这种文件名解释为：“`/*`”的正则。所以仍然存在局限。
 * 方法名文件里面的结构：
-  ```js
+
+  ```javascript
   module.exports={
       info:{},//接口信息
       handle:function(req,res){//处理函数
@@ -103,7 +105,7 @@
     <tr><td>type</td><td>String</td><td>key有两个值，<br/>当type为nomal时，返回一个包含所有接口的info的简单数组，<br/>当type为tree时，返回一个包含所有接口的info的树形json。<br/>若type不存在或type为其他值时，返回接口文档的html文件</td></tr>
     </table>
 * info里面用于渲染的模板参数：
-```js
+```javascript
 info:{
     name:'To get...',//接口的名字
     summary:'something',//接口的摘要信息
