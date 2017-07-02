@@ -1,6 +1,6 @@
 {
     "name": "express-dir-route",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "a plugin for express.register routes base on file path",
     "main": "index.js",
     "directories": {

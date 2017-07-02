@@ -39,6 +39,10 @@ module.exports=app;
         <td>rename</td>
         <td>设置接口url前缀</td>
     </tr>
+    <tr>
+        <td>isCreateDoc</td>
+        <td>是否创建接口文档</td>
+    </tr>
 </table>
 
 > **注意：**  
